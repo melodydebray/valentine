@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Caleb 💘</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #ffc0cb, #ffd6e8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Comic Sans MS", Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 5;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.subtitle {
+  color: gray;
+  font-size: 14px;
+}
+
+.buttons {
+  margin-top: 30px;
+  position: relative;
+  height: 120px;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 28px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#yesBtn {
+  background: hotpink;
+  color: white;
+}
+
+#noBtn {
+  background: lightgray;
+  position: absolute;
+  left: 0;
+}
+
+#yayScreen {
+  display: none;
+}
+
+img {
+  width: 240px;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.confetti {
+  font-size: 30px;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(4deg); }
+  50% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.shake {
+  animation: shake 0.4s infinite;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Hearts -->
+<script>
+for (let i = 0; i < 25; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 3 + Math.random() * 5 + "s";
+  document.body.appendChild(heart);
+}
+</script>
+
+<div class="card" id="questionScreen">
+
+  <h1>Caleb will you be my Valentine? 💘</h1>
+  <p class="subtitle">(say yes or I cry)</p>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 🙄</button>
+  </div>
+
+  <p id="tease" class="subtitle">No seems a little suspicious…</p>
+
+</div>
+
+<div class="card" id="yayScreen">
+
+  <h1>YAYYY!!! 🥰🎉</h1>
+  <p class="confetti">💖💖💖💖💖</p>
+  <p>You just made me the happiest person alive.</p>
+
+  <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+
+  <p class="subtitle">Screenshot this. Proof forever.</p>
+
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const questionScreen = document.getElementById("questionScreen");
+const yayScreen = document.getElementById("yayScreen");
+const tease = document.getElementById("tease");
+
+// Move NO button
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 240;
+  const y = Math.random() * 80;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  tease.innerText = "HEY. that button is decorative.";
+});
+
+// Add shaking after repeated tries
+let hoverCount = 0;
+noBtn.addEventListener("mouseenter", () => {
+  hoverCount++;
+  if (hoverCount > 4) {
+    noBtn.classList.add("shake");
+  }
+});
+
+// YES clicked
+yesBtn.addEventListener("click", () => {
+  questionScreen.style.display = "none";
+  yayScreen.style.display = "block";
+});
+</script>
+
+</body>
+</html>
